@@ -16,6 +16,15 @@ app.post('/',async(req,res)=>{
     res.send(result);
 })
 
+app.put('/:name', async (req,res)=>{
+    let data=await dbConnect();
+    let result=await data.updateOne(
+        {name: req.params.name},
+        {$set: req.body}
+    );
+    res.send({status: "updated",result});
+})
+
 app.listen(5000,()=>{
     console.log("Api server started");
 });
